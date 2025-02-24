@@ -29,7 +29,7 @@
             width: 100%;
             height: 100%;
             background-image:
-                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba 0.1) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
             background-size: 30px 30px;
             z-index: -1;
@@ -43,42 +43,76 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text        }
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
+        /* Smooth Crystal White Cursor */
         .cursor {
-            width: 50px;
-            height: 50px;
-            background: rgba(79, 70, 229, 0.3);
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            position: absolute;
+            position: fixed;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            transition: transform 0.1s ease-out, width 0.1s ease-out, height 0.1s ease-out;
+            transition: transform 0.1s ease-out;
+            backdrop-filter: blur(3px);
         }
 
-        .hover-effect:hover ~ .cursor {
-            width: 70px;
-            height: 70px;
-            background: rgba(79, 70, 229, 0.5);
+        /* Button Styling */
+        .button {
+            display: inline-block;
+            background: #6366F1;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+            text-decoration: none;
         }
 
-        .project-card {
+        .button:hover {
+            background: #4F46E5;
+        }
+
+        /* Project Section */
+        .project {
             background: rgba(30, 41, 59, 0.8);
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 0.75rem;
-            transition: transform 0.2s ease-out, background 0.2s ease;
             backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            text-align: left;
+            transition: transform 0.2s ease-out, background 0.2s ease;
         }
 
-        .project-card:hover {
+        .project:hover {
             transform: scale(1.05);
             background: rgba(30, 41, 59, 0.9);
         }
 
-        .project-card a {
-            display: block;
-            text-decoration: none;
-            color: inherit;
+        .project:nth-child(2) {
+            flex-direction: row-reverse;
+        }
+
+        .project-content {
+            flex: 1;
+        }
+
+        .project-button {
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            .project {
+                flex-direction: column !important;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -91,28 +125,60 @@
         <p class="text-slate-400 mt-2">My name is Jordan. I'm a 14-year-old developer from England who started coding at 7. I really like cooking and basketball.</p>
     </header>
 
-    <!-- Change the # to your actual website links -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl w-full px-4">
-        <a href="#" class="project-card hover-effect">
-            <h2 class="text-xl font-semibold text-indigo-400">E-commerce Business</h2>
-            <p class="text-slate-400 mt-2">My website for a store selling dog treats.</p>
-        </a>
-        <a href="#" class="project-card hover-effect">
-            <h2 class="text-xl font-semibold text-indigo-400">Roofing Business</h2>
-            <p class="text-slate-400 mt-2">A landing page for a Roofing Business.</p>
-        </a>
-        <a href="#" class="project-card hover-effect">
-            <h2 class="text-xl font-semibold text-indigo-400            <p class="text-slate-400 mt-2">A storefront for a company offering artificial grass.</p>
-        </a>
+    <div class="grid grid-cols-1 gap-6 max-w-4xl w-full px-4">
+        <!-- E-commerce Business -->
+        <div class="project">
+            <div class="project-button">
+                <a href="#" class="button">View Project</a>
+            </div>
+            <div class="project-content">
+                <h2 class="text-xl font-semibold text-indigo-400">E-commerce Business</h2>
+                <p class="text-slate-400 mt-2">My website for a store selling dog treats.</p>
+            </div>
+        </div>
+
+        <!-- Roofing Business -->
+        <div class="project">
+            <div class="project-button">
+                <a href="#" class="button">View Project</a>
+            </div>
+            <div class="project-content">
+                <h2 class="text-xl font-semibold text-indigo-400">Roofing Business</h2>
+                <p class="text-slate-400 mt-2">A landing page for a Roofing Business.</p>
+            </div>
+        </div>
+
+        <!-- Artificial Grass -->
+        <div class="project">
+            <div class="project-button">
+                <a href="#" class="button">View Project</a>
+            </div>
+            <div class="project-content">
+                <h2 class="text-xl font-semibold text-indigo-400">Artificial Grass</h2>
+                <p class="text-slate-400 mt-2">A storefront for a company offering artificial grass.</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Cursor effect
+        // Smooth Cursor Effect
         const cursor = document.querySelector(".cursor");
+        let = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let speed = 0.15; // Smoothness factor
+
         document.addEventListener("mousemove", (e) => {
-            cursor.style.left = `${e.clientX}px`;
-            cursor.style.top = `${e.clientY}px`;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+            cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
     </script>
 
 </body>
