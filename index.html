@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -21,6 +22,7 @@
             border-radius: 10px;
         }
 
+        /* Background Grid */
         body::before {
             content: "";
             position: fixed;
@@ -29,16 +31,17 @@
             width: 100%;
             height: 100%;
             background-image:
-                linear-gradient(rgba 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
             background-size: 30px 30px;
             z-index: -1;
         }
 
+        /* Body Styling */
         body {
             font-family: 'Inter', sans-serif;
             background: #0f172a;
-            min-height: 100vh;
+            min-height: ;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -57,8 +60,8 @@
             position: fixed;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            transition: transform 0.1s ease-out;
             backdrop-filter: blur(3px);
+            transition: transform 0.1s ease-out;
         }
 
         /* Button Styling */
@@ -122,7 +125,7 @@
 
     <header class="mb-12">
         <h1 class="text-4xl font-bold">Welcome to My Portfolio!</h1>
-        <p class="text-slate-400 mt-2">My name is Jordan. I'm a 14-year-old developer from England who started coding at 7. I really like cooking and basketball.</p>
+2">My name is Jordan. I'm a 14-year-old developer from England who started coding at 7. I really like cooking and basketball.</p>
     </header>
 
     <div class="grid grid-cols-1 gap-6 max-w-4xl w-full px-4">
@@ -163,7 +166,7 @@
     <script>
         // Smooth Cursor Effect
         const cursor = document.querySelector(".cursor");
-        let = 0, mouseY = 0;
+        let mouseX = 0, mouseY = 0;
         let cursorX = 0, cursorY = 0;
         let speed = 0.15; // Smoothness factor
 
