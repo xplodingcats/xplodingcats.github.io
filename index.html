@@ -1,189 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jordan's Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jordan's Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #4f46e5;
+      border-radius: 10px;
+    }
 
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+    /* Background Grid */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: -1;
+    }
 
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
+    /* Body Styling */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+      padding-bottom: 100px;
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background: #4f46e5;
-            border-radius: 10px;
-        }
+    /* Smooth Crystal White Cursor */
+    .cursor {
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      backdrop-filter: blur(3px);
+      z-index: 1000;
+    }
 
-        /* Background Grid */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0100%;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
-        }
+    /* Button Styling */
+    .button {
+      display: inline-block;
+      background: #6366F1;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s ease;
+      text-decoration: none;
+    }
+    .button:hover {
+      background: #4F46E5;
+    }
 
-        /* Body Styling */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0f172a;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    /* Project Section */
+    .project {
+      background: rgba(30, 41, 59, 0.8);
+      padding: 2rem;
+      border-radius: 0.75rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-align: left;
+      transition: transform 0.2s ease-out, background 0.2s ease;
+      margin-bottom: 1.5rem;
+    }
+    .project:hover {
+      transform: scale(1.05);
+      background: rgba(30, 41, 59, 0.9);
+    }
+    /* Alternate layout: second project reversed */
+    .project:nth-child(2) {
+      flex-direction: row-reverse;
+    }
+    .project-content {
+      flex: 1;
+    }
+    .project-button {
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) {
+      .project {
+        flex-direction: column !important;
+        text-align: center;
+      }
+    }
 
-        /* Smooth Crystal White Cursor */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            backdrop-filter: blur(3px);
-            transition: transform 0.1s ease-out;
-        }
-
-        /* Button Styling */
-        .button {
-            display: inline-block;
-            background: #6366F1;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.2s ease;
-            text-decoration: none;
-        }
-
-        .button:hover {
-            background: #4F46E5;
-        }
-
-        /* Project Section */
-        .project {
-            background: rgba(30, 41, 59, 0.8);
-            padding: 2rem;
-            border-radius: 0.75rem;
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            text-align: left;
-            transition: transform 0.2s ease-out, background 0.2s ease;
-        }
-
-        .project:hover {
-            transform: scale(1.05);
-            background: rgba(30, 41, 59, 0.9);
-        }
-
-        /* Make Layout Alternate */
-        .project:nth-child(2) {
-            flex-direction: row-reverse;
-        }
-
-        .project:nth-child(3) {
-            flex-direction: row;
-        }
-
-        .project-content {
-            flex: 1;
-        }
-
-        .project-button {
-            flex-shrink: 0;
-        }
-
-        /* Media Query for Mobile */
-        @media (max: column !important;
-                text-align: center;
-            }
-        }
-    </style>
+    /* Contact Section / Scratch Card */
+    #contact {
+      margin-top: 3rem;
+      padding: 2rem;
+      max-width: 400px;
+      width: 100%;
+      background: rgba(30, 41, 59, 0.8);
+      border-radius: 0.75rem;
+      backdrop-filter: blur(10px);
+    }
+    #contact h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #c7d2fe;
+      margin-bottom: 1rem;
+    }
+    #contact .scratch-container {
+      position: relative;
+      width: 100%;
+      height: 80px;
+      margin-top: 1rem;
+    }
+    #contact .phone-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e2e8f0;
+      line-height: 80px;
+      /* Center text behind canvas */
+    }
+    #contact canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
 </head>
 <body class="text-slate-200">
+  <!-- Smooth Cursor -->
+  <div class="cursor"></div>
 
-    <div class="cursor"></div>
+  <!-- Header -->
+  <header class="mb-12 pt-8">
+    <h1 class="text-4xl font-bold">Welcome to My Portfolio!</h1>
+    <p class="text-slate-400 mt-2">
+      My name is Jordan. I'm a 14-year-old developer from England who started coding at 7.
+      I really like cooking and basketball.
+    </p>
+  </header>
 
-    <header class="mb-12">
-        <h1 class="text-4xl font-bold">Welcome to My Portfolio!</h1>
-        <p class="text-slate-400 mt-2">My name is Jordan. I'm a 14-year-old developer from England who started coding at 7. I really like cooking and basketball.</p>
-    </header>
-
-    <div class="grid grid-cols-1 gap-6 max-w-4xl w-full px-4">
-        <!-- E-commerce Business -->
-        <div class="project">
-            <div class="project-button">
-                <a href="#" class="button">View Project</a>
-            </div>
-            <div class="project-content">
-                <h2 class="text-xl font-semibold text-indigo-400">E-commerce Business</h2>
-                <p class="text-slate-400 mt-2">My website for a store selling dog treats.</p>
-            </div>
-        </div>
-
-        <!-- Roofing Business -->
-        <div class="project">
-            <div class="project-button">
-                <a href="#" class="button">View Project</a>
-            </div>
-            <div class="project-content">
-                <h2 class="text-xl font-semibold text-indigo-400">Roofing Business</h2>
-                <p class="text-slate-400 mt-2">A landing page for a Roofing Business.</p>
-            </div>
-        </div>
-
-        <!-- Artificial Grass -->
-        <div class="project">
-            <div class="project-button">
-                <a href="#" class="button">View Project</a>
-            </div>
-            <div class="project-content">
-                <h2 class="text-xl font-semibold text-indigo-400">Artificial Grass</h2>
-                <p class="text-slate-400 mt-2">A storefront for a company offering artificial grass.</p>
-            </div>
-        </div>
+  <!-- Projects Section -->
+  <div class="grid grid-cols-1 gap-6 max-w-4xl w-full px-4">
+    <!-- E-commerce Business -->
+    <div class="project">
+      <div class="project-button">
+        <a href="#" class="button">View Project</a>
+      </div>
+      <div class="project-content">
+        <h2 class="text-xl font-semibold text-indigo-400">E-commerce Business</h2>
+        <p class="text-slate-400 mt-2">My website for a store selling dog treats.</p>
+      </div>
     </div>
 
-    <script>
-        // Smooth Cursor Effect (Now Positioned Correctly)
-        const cursor = document.querySelector(".cursor");
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        let speed = 0.15; // Smoothness factor
+    <!-- Roofing Business -->
+    <div class="project">
+      <div class="project-button">
+        <a href="#" class Project</a>
+      </div>
+      <div class="project-content">
+        <h2 class="text-xl font-semibold text-indigo-400">Roofing Business</h2>
+        <p class="text-slate-400 mt-2">A landing page for a Roofing Business.</p>
+      </div>
+    </div>
 
-        document.addEventListener("mousemove", (e) => {
-            mouseX = e.clientX - (cursor.offsetWidth / 2);
-           .offsetHeight / 2);
-        });
+    <!-- Artificial Grass -->
+    <div class="project">
+      <div class="project-button">
+        <a href="#" class="button">View Project</a>
+      </div>
+      <div class="project-content">
+        <h2 class="text-xl font-semibold text-indigo-400">Artificial Grass</h2>
+        <p class="text-slate-400 mt-2">A storefront for a company offering artificial grass.</p>
+      </div>
+    </div>
+  </div>
 
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * speed;
-            cursorY += (mouseY - cursorY) * speed;
-            cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-    </script>
+  <!-- Contact Section with Scratch Card Effect -->
+  <section id="contact" class="mx-4">
+    <h2>Contact Me</h2>
+    <p class="text-slate-400">Scratch the box below to reveal my phone number!</p>
+    <div class="scratch-container">
+      <!-- Phone number is placed behind the canvas -->
+      <div class="phone-number">01234 567890</div>
+      <canvas id="scratchCard"></canvas>
+    </div>
+  </section>
 
+  <script>
+    /* --- Smooth Cursor Effect --- */
+    const cursor = document.querySelector(".cursor");
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    const speed = 0.15; // smoothness factor
+
+    document.addEventListener("mousemove", (e) => {
+      // Set target to mouse coordinates minus half cursor width/height
+      mouseX = e.clientX - cursor.offsetWidth / 2;
+      mouseY = e.clientY - cursor.offsetHeight / 2;
+    });
+
+    function animateCursor() {
+      cursorX += (mouseX - cursorX) * speed;
+      cursorY += (mouseY - cursorY) * speed;
+      cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    /* --- Scratch Card Effect for Contact Phone Number --- */
+    const scratchCard = document.getElementById("scratchCard");
+    const scratchContainer = document.querySelector(".scratch-container");
+    const ctx = scratchCard.getContext("2d");
+
+    // Set canvas dimensions equal to its container
+    function resizeCanvas() {
+      scratchCard.width = scratchContainer.offsetWidth;
+      scratchCard.height = scratchContainer.offsetHeightListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function initScratchCard() {
+      // Fill canvas with gray scratch cover
+      ctx.fillStyle = "#aaa";
+      ctx.fillRect(0, 0, scratchCard.width, scratchCard.height);
+      // Draw overlay text
+      ctx.font = "20px sans-serif";
+      ctx.fillStyle = "black";
+      ctx.textAlign = "center";
+      ctx.fillText("Scratch here to reveal", scratchCard.width / 2, scratchCard.height / 2 + 7);
+    }
+
+    let isDrawing = false;
+
+    function scratch(e) {
+      if (!isDrawing) return;
+      const rect = scratchCard.getBoundingClientRect();
+      const x = (e.clientX || e.touches[0].clientX) - rect.left;
+      const y = (e.clientY || e.touches[0].clientY) - rect.top;
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.beginPath();
+      ctx.arc(x, y, 20, 0, Math.PI * 2, false);
+      ctx.fill();
+    }
+
+    scratchCard.addEventListener("mousedown", (e) => {
+      isDrawing = true;
+      scratch(e);
+    });
+    scratchCard.addEventListener("mousemove", scratch);
+    scratchCard.addEventListener("mouseup", () => { isDrawing = false; });
+    scratchCard.addEventListener("touchstart", (e) => {
+      isDrawing = true;
+      scratch(e);
+    });
+    scratchCard.addEventListener("touchmove", (e) => {
+      scratch(e);
+      e.preventDefault();
+    });
+    scratchCard.addEventListener("touchend", () => { isDrawing = false; });
+  </script>
 </body>
 </html>
