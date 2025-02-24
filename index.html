@@ -18,7 +18,6 @@
       background: #4f46e5;
       border-radius: 10px;
     }
-
     /* Background Grid */
     body::before {
       content: "";
@@ -33,7 +32,6 @@
       background-size: 30px 30px;
       z-index: -1;
     }
-
     /* Body Styling */
     body {
       font-family: 'Inter', sans-serif;
@@ -48,8 +46,7 @@
       overflow-x: hidden;
       padding-bottom: 100px;
     }
-
-    /* Smooth Crystal White Cursor */
+    /* Smooth Crystal White Cursor using CSS transition */
     .cursor {
       width: 20px;
       height: 20px;
@@ -57,10 +54,9 @@
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
-      backdrop-filter: blur(3px);
-      z-index: 1000;
+      backdrop-filter: blur(3px0;
+      transition: left 0.1s ease-out, top 0.1s ease-out;
     }
-
     /* Button Styling */
     .button {
       display: inline-block;
@@ -75,7 +71,6 @@
     .button:hover {
       background: #4F46E5;
     }
-
     /* Project Section */
     .project {
       background: rgba(30, 41, 59, 0.8);
@@ -110,7 +105,6 @@
         text-align: center;
       }
     }
-
     /* Contact Section / Scratch Card */
     #contact {
       margin-top: 3rem;
@@ -138,7 +132,6 @@
       font-weight: bold;
       color: #e2e8f0;
       line-height: 80px;
-      /* Center text behind canvas */
     }
     #contact canvas {
       position: absolute;
@@ -149,17 +142,14 @@
 </head>
 <body class="text-slate-200">
   <!-- Smooth Cursor -->
-  <div class="cursor"></div>
-
+  <div class="cursor" id="cursor"></div>
   <!-- Header -->
   <header class="mb-12 pt-8">
     <h1 class="text-4xl font-bold">Welcome to My Portfolio!</h1>
-    <p class="text-slate-400 mt-2">
-      My name is Jordan. I'm a 14-year-old developer from England who started coding at 7.
+    <      My name is Jordan. I'm a 14-year-old developer from England who started coding at 7.
       I really like cooking and basketball.
     </p>
   </header>
-
   <!-- Projects Section -->
   <div class="grid grid-cols-1 gap-6 max-w-4xl w-full px-4">
     <!-- E-commerce Business -->
@@ -172,18 +162,16 @@
         <p class="text-slate-400 mt-2">My website for a store selling dog treats.</p>
       </div>
     </div>
-
     <!-- Roofing Business -->
     <div class="project">
       <div class="project-button">
-        <a href="#" class Project</a>
+        <a href="#" class="button">View Site</a>
       </div>
       <div class="project-content">
         <h2 class="text-xl font-semibold text-indigo-400">Roofing Business</h2>
         <p class="text-slate-400 mt-2">A landing page for a Roofing Business.</p>
       </div>
     </div>
-
     <!-- Artificial Grass -->
     <div class="project">
       <div class="project-button">
@@ -195,89 +183,59 @@
       </div>
     </div>
   </div>
-
   <!-- Contact Section with Scratch Card Effect -->
   <section id="contact" class="mx-4">
     <h2>Contact Me</h2>
     <p class="text-slate-400">Scratch the box below to reveal my phone number!</p>
     <div class="scratch-container">
-      <!-- Phone number is placed behind the canvas -->
       <div class="phone-number">01234 567890</div>
       <canvas id="scratchCard"></canvas>
     </div>
   </section>
-
   <script>
-    /* --- Smooth Cursor Effect --- */
-    const cursor = document.querySelector(".cursor");
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
-    const speed = 0.15; // smoothness factor
-
-    document.addEventListener("mousemove", (e) => {
-      // Set target to mouse coordinates minus half cursor width/height
-      mouseX = e.clientX - cursor.offsetWidth / 2;
-      mouseY = e.clientY - cursor.offsetHeight / 2;
-    });
-
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * speed;
-      cursorY += (mouseY - cursorY) * speed;
-      cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    /* --- Scratch Card Effect for Contact Phone Number --- */
+    /* --- Cursor Follow --- */
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', (e) => {
+      // Update cursor position directly; CSS transition will smooth the change.
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    Card Effect --- */
     const scratchCard = document.getElementById("scratchCard");
     const scratchContainer = document.querySelector(".scratch-container");
     const ctx = scratchCard.getContext("2d");
-
-    // Set canvas dimensions equal to its container
-    function resizeCanvas() {
+function resizeCanvas() {
       scratchCard.width = scratchContainer.offsetWidth;
-      scratchCard.height = scratchContainer.offsetHeightListener("resize", resizeCanvas);
+      scratchCard.height = scratchContainer.offsetHeight;
+      initScratchCard();
+    }
+    window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
-
-    function initScratchCard() {
-      // Fill canvas with gray scratch cover
+function initScratchCard() {
+      ctx.globalCompositeOperation = "source-over";
       ctx.fillStyle = "#aaa";
       ctx.fillRect(0, 0, scratchCard.width, scratchCard.height);
-      // Draw overlay text
       ctx.font = "20px sans-serif";
       ctx.fillStyle = "black";
       ctx.textAlign = "center";
       ctx.fillText("Scratch here to reveal", scratchCard.width / 2, scratchCard.height / 2 + 7);
     }
-
-    let isDrawing = false;
-
-    function scratch(e) {
-      if (!isDrawing) return;
+let isScratching = false;
+function scratch(e) {
+      if (!isScratching) return;
       const rect = scratchCard.getBoundingClientRect();
       const x = (e.clientX || e.touches[0].clientX) - rect.left;
       const y = (e.clientY || e.touches[0].clientY) - rect.top;
       ctx.globalCompositeOperation = "destination-out";
       ctx.beginPath();
-      ctx.arc(x, y, 20, 0, Math.PI * 2, false);
+      ctx.arc(x, y, 20, 0, Math.PI * 2);
       ctx.fill();
     }
-
-    scratchCard.addEventListener("mousedown", (e) => {
-      isDrawing = true;
-      scratch(e);
-    });
+scratchCard.addEventListener("mousedown", () => { isScratching = true; });
     scratchCard.addEventListener("mousemove", scratch);
-    scratchCard.addEventListener("mouseup", () => { isDrawing = false; });
-    scratchCard.addEventListener("touchstart", (e) => {
-      isDrawing = true;
-      scratch(e);
-    });
-    scratchCard.addEventListener("touchmove", (e) => {
-      scratch(e);
-      e.preventDefault();
-    });
-    scratchCard.addEventListener("touchend", () => { isDrawing = false; });
+    scratchCard.addEventListener("mouseup", () => { isScratching = false; });
+    scratchCard.addEventListener("touchstart", (e) => { isScratching = true; scratch(e); });
+    scratchCard.addEventListener("touchmove", (e) => { scratch(e); e.preventDefault(); });
+    scratchCard.addEventListener("touchend", () => { isScratching = false; });
   </script>
 </body>
 </html>
